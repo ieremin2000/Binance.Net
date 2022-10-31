@@ -197,7 +197,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamRollingWindowTick>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
 
-            string windowSizeStr = (windowSize.Equals(TimeSpan.FromDays(1)) ? "1d" : $"{windowSize.TotalHours}h";
+            string windowSizeStr = (windowSize.Equals(TimeSpan.FromDays(1))) ? "1d" : $"{windowSize.TotalHours}h";
 
             return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { $"{symbol.ToLowerInvariant()}@ticker_{windowSizeStr}" }, handler, ct).ConfigureAwait(false);
         }
