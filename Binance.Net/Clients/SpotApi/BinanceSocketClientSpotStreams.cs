@@ -196,7 +196,10 @@ namespace Binance.Net.Clients.SpotApi
             Action<DataEvent<BinanceStreamRollingWindowTick>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamRollingWindowTick>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
-            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { $"{symbol.ToLowerInvariant()}@ticker_{windowSize.TotalHours}h" }, handler, ct).ConfigureAwait(false);
+
+            string windowSizeStr = (windowSize.Equals(TimeSpan.FromDays(1)) ? "1d" : $"{windowSize.TotalHours}h";
+
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { $"{symbol.ToLowerInvariant()}@ticker_{windowSizeStr}" }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
