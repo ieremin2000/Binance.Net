@@ -116,15 +116,6 @@ namespace Binance.Net.Converters
                 //        MinTrailingBelowDelta = (int)obj["minTrailingBelowDelta"],
                 //    };
                 //    break;
-                case SymbolFilterType.TrailingDelta:
-                    result = new BinanceSymbolTrailingDeltaFilter
-                    {
-                        MaxTrailingAboveDelta = (int)obj["maxTrailingAboveDelta"],
-                        MaxTrailingBelowDelta = (int)obj["maxTrailingBelowDelta"],
-                        MinTrailingAboveDelta = (int)obj["minTrailingAboveDelta"],
-                        MinTrailingBelowDelta = (int)obj["minTrailingBelowDelta"],
-                    };
-                    break;
                 case SymbolFilterType.IcebergOrders:
                     result = new BinanceMaxNumberOfIcebergOrdersFilter
                     {
